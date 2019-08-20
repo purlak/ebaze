@@ -22,11 +22,6 @@ defmodule EbazeWeb.Router do
     
     resources "/auctions", AuctionController
 
-    resources "/signin", SessionController, only: [:new, :create]
+    resources "/sign-in", SessionController, only: [:new, :create]
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", EbazeWeb do
-  #   pipe_through :api
-  # end
 end

@@ -3,7 +3,7 @@ defmodule EbazeWeb.SessionControllerTest do
     
     describe "new session" do
        
-        test "renders login form", %{conn: conn} do
+        test "renders sign-in form", %{conn: conn} do
           conn = get(conn, Routes.session_path(conn, :new))
           assert html_response(conn, 200) =~ "Sign in"
         end
