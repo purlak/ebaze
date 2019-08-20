@@ -1,11 +1,16 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Ebaze.Repo.insert!(%Ebaze.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias Ebaze.Accounts.User
+alias Ebaze.Auctions.Auction
+alias Ebaze.Repo
+
+Repo.insert! %User{
+    username: "username",
+    password: "password"
+}
+
+Repo.insert! %Auction{
+    name: "Canon T5i camera",
+    description: "Canon DSLR camera with 18-55mm kit lens - sold as is",
+    photo_url: "https://unsplash.com/photos/g4wujH0p80o",
+    initial_price: 250.0,
+    sold_status: false
+}
