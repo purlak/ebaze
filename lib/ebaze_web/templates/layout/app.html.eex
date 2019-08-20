@@ -13,7 +13,7 @@
         <nav role="navigation">
           <ul>
             <li><a href="/signup">Signup</a></li>
-            <li><a href="/login">Login</a></li>
+            <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "nav-link" %>
           </ul>
         </nav>
         <a href="/" class="phx-logo">

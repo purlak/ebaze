@@ -21,6 +21,8 @@ defmodule EbazeWeb.Router do
     resources "/users", UserController
     
     resources "/auctions", AuctionController
+
+    resources "/signin", SessionController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.

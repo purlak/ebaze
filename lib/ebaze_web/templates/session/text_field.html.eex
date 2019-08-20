@@ -1,0 +1,3 @@
+<%= label @f, @key %>
+<%= text_input @f, @key %>
+<%= error_tag @f, @key %>
