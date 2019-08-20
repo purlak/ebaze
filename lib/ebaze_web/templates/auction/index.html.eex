@@ -19,7 +19,7 @@
     <tr>
       <td><%= auction.name %></td>
       <td><%= auction.description %></td>
-      <td><%= auction.sold_status %></td>
+      <td><%= auction.sold %></td>
       <td><%= auction.initial_price %></td>
       <td><%= auction.start_time %></td>
       <td><%= auction.end_time %></td>

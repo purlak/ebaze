@@ -14,7 +14,7 @@
 
   <li>
     <strong>Sold status:</strong>
-    <%= @auction.sold_status %>
+    <%= @auction.sold %>
   </li>
 
   <li>

@@ -7,15 +7,11 @@ Repo.insert! %User{
     password: "password"
 }
 
-Repo.insert! %User{
-    username: "testuser",
-    password: "testpassword"
-}
-
 Repo.insert! %Auction{
     name: "Canon T5i camera",
     description: "Canon DSLR camera with 18-55mm kit lens - sold as is",
     photo_url: "https://unsplash.com/photos/g4wujH0p80o",
     initial_price: 250.0,
-    sold_status: false
+    sold: false
 }
+

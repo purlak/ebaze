@@ -1,7 +1,5 @@
 defmodule EbazeWeb.SessionControllerTest do
     use EbazeWeb.ConnCase
-  
-    alias Ebaze.Accounts
     
     describe "new session" do
        

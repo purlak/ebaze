@@ -8,16 +8,15 @@ defmodule Ebaze.Auctions.Auction do
     field :initial_price, :decimal
     field :name, :string
     field :photo_url, :string
-    field :sold_status, :boolean, default: false
+    field :sold, :boolean, default: false
     field :start_time, :utc_datetime
 
     timestamps()
   end
 
-  @doc false
   def changeset(auction, attrs) do
     auction
-    |> cast(attrs, [:name, :description, :sold_status, :initial_price, :start_time, :end_time, :photo_url])
-    |> validate_required([:name, :description, :sold_status, :initial_price, :start_time, :end_time, :photo_url])
+    |> cast(attrs, [:name, :description, :sold, :initial_price, :start_time, :end_time, :photo_url])
+    |> validate_required([:name, :description, :sold, :initial_price, :start_time, :end_time, :photo_url])
   end
 end

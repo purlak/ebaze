@@ -13,9 +13,9 @@
   <%= text_input f, :description %>
   <%= error_tag f, :description %>
 
-  <%= label f, :sold_status %>
-  <%= checkbox f, :sold_status %>
-  <%= error_tag f, :sold_status %>
+  <%= label f, :sold %>
+  <%= checkbox f, :sold %>
+  <%= error_tag f, :sold %>
 
   <%= label f, :initial_price %>
   <%= number_input f, :initial_price, step: "any" %>

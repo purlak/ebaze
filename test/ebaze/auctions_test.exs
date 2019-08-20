@@ -6,9 +6,9 @@ defmodule Ebaze.AuctionsTest do
   describe "auctions" do
     alias Ebaze.Auctions.Auction
 
-    @valid_attrs %{description: "some description", end_time: "2010-04-17T14:00:00Z", initial_price: "120.5", name: "some name", photo_url: "some photo_url", sold_status: true, start_time: "2010-04-17T14:00:00Z"}
-    @update_attrs %{description: "some updated description", end_time: "2011-05-18T15:01:01Z", initial_price: "456.7", name: "some updated name", photo_url: "some updated photo_url", sold_status: false, start_time: "2011-05-18T15:01:01Z"}
-    @invalid_attrs %{description: nil, end_time: nil, initial_price: nil, name: nil, photo_url: nil, sold_status: nil, start_time: nil}
+    @valid_attrs %{description: "some description", end_time: "2010-04-17T14:00:00Z", initial_price: "120.5", name: "some name", photo_url: "some photo_url", sold: true, start_time: "2010-04-17T14:00:00Z"}
+    @update_attrs %{description: "some updated description", end_time: "2011-05-18T15:01:01Z", initial_price: "456.7", name: "some updated name", photo_url: "some updated photo_url", sold: false, start_time: "2011-05-18T15:01:01Z"}
+    @invalid_attrs %{description: nil, end_time: nil, initial_price: nil, name: nil, photo_url: nil, sold: nil, start_time: nil}
 
     def auction_fixture(attrs \\ %{}) do
       {:ok, auction} =
@@ -36,7 +36,7 @@ defmodule Ebaze.AuctionsTest do
       assert auction.initial_price == Decimal.new("120.5")
       assert auction.name == "some name"
       assert auction.photo_url == "some photo_url"
-      assert auction.sold_status == true
+      assert auction.sold == true
       assert auction.start_time == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
     end
 
@@ -52,7 +52,7 @@ defmodule Ebaze.AuctionsTest do
       assert auction.initial_price == Decimal.new("456.7")
       assert auction.name == "some updated name"
       assert auction.photo_url == "some updated photo_url"
-      assert auction.sold_status == false
+      assert auction.sold == false
       assert auction.start_time == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
     end
 
