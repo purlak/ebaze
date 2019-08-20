@@ -5,7 +5,7 @@ defmodule Ebaze.Repo.Migrations.CreateAuctions do
     create table(:auctions) do
       add :name, :string
       add :description, :string
-      add :sold, :boolean, default: false, null: false
+      add :sold_status, :boolean, default: false, null: false
       add :initial_price, :decimal
       add :start_time, :utc_datetime
       add :end_time, :utc_datetime
