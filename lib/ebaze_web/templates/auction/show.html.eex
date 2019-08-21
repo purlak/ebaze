@@ -13,7 +13,7 @@
   </li>
 
   <li>
-    <strong>Sold status:</strong>
+    <strong>Sold:</strong>
     <%= @auction.sold %>
   </li>
 
@@ -34,7 +34,7 @@
 
   <li>
     <strong>Photo url:</strong>
-    <%= @auction.photo_url %>
+    <img src="<%= @auction.photo_url %>"/>
   </li>
 
 </ul>

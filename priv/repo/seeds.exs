@@ -7,6 +7,11 @@ Repo.insert! %User{
     password: "password"
 }
 
+Repo.insert! %User{
+    username: "username",
+    password: "test"
+}
+
 Repo.insert! %Auction{
     name: "Canon T5i camera",
     description: "Canon DSLR camera with 18-55mm kit lens - sold as is",
