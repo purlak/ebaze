@@ -30,8 +30,6 @@ defmodule Ebaze.Auctions.Auction do
       :description,
       :sold,
       :initial_price,
-      :start_time,
-      :end_time,
       :photo_url
     ])
   end

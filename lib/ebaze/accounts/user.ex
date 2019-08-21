@@ -13,6 +13,7 @@ defmodule Ebaze.Accounts.User do
     user
     |> cast(attrs, [:username, :password])
     |> validate_required([:username, :password])
+    |> validate_length(:password, min: 6)
     |> unique_constraint(:username, message: "username is not unique. try again")
     |> put_password_hash()
   end
