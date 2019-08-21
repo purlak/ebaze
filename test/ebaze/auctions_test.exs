@@ -6,9 +6,33 @@ defmodule Ebaze.AuctionsTest do
   describe "auctions" do
     alias Ebaze.Auctions.Auction
 
-    @valid_attrs %{description: "some description", end_time: "2010-04-17T14:00:00Z", initial_price: "120.5", name: "some name", photo_url: "some photo_url", sold: true, start_time: "2010-04-17T14:00:00Z"}
-    @update_attrs %{description: "some updated description", end_time: "2011-05-18T15:01:01Z", initial_price: "456.7", name: "some updated name", photo_url: "some updated photo_url", sold: false, start_time: "2011-05-18T15:01:01Z"}
-    @invalid_attrs %{description: nil, end_time: nil, initial_price: nil, name: nil, photo_url: nil, sold: nil, start_time: nil}
+    @valid_attrs %{
+      description: "some description",
+      end_time: "2010-04-17T14:00:00Z",
+      initial_price: "120.5",
+      name: "some name",
+      photo_url: "some photo_url",
+      sold: true,
+      start_time: "2010-04-17T14:00:00Z"
+    }
+    @update_attrs %{
+      description: "some updated description",
+      end_time: "2011-05-18T15:01:01Z",
+      initial_price: "456.7",
+      name: "some updated name",
+      photo_url: "some updated photo_url",
+      sold: false,
+      start_time: "2011-05-18T15:01:01Z"
+    }
+    @invalid_attrs %{
+      description: nil,
+      end_time: nil,
+      initial_price: nil,
+      name: nil,
+      photo_url: nil,
+      sold: nil,
+      start_time: nil
+    }
 
     def auction_fixture(attrs \\ %{}) do
       {:ok, auction} =

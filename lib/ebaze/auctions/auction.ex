@@ -16,7 +16,23 @@ defmodule Ebaze.Auctions.Auction do
 
   def changeset(auction, attrs) do
     auction
-    |> cast(attrs, [:name, :description, :sold, :initial_price, :start_time, :end_time, :photo_url])
-    |> validate_required([:name, :description, :sold, :initial_price, :start_time, :end_time, :photo_url])
+    |> cast(attrs, [
+      :name,
+      :description,
+      :sold,
+      :initial_price,
+      :start_time,
+      :end_time,
+      :photo_url
+    ])
+    |> validate_required([
+      :name,
+      :description,
+      :sold,
+      :initial_price,
+      :start_time,
+      :end_time,
+      :photo_url
+    ])
   end
 end

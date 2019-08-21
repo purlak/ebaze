@@ -15,5 +15,14 @@ defmodule Ebaze.Accounts.User do
     |> validate_required([:username, :password])
     |> unique_constraint(:username, message: "username is not unique. try again")
     |> validate_length(:password, min: 6, message: "password should be 6 or more characters")
+    |> put_password_hash()
   end
+
+  defp put_password_hash(
+         %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
+       ) do
+    change(changeset, password: Bcrypt.hash_pwd_salt(password))
+  end
+
+  defp put_password_hash(changeset), do: changeset
 end

@@ -60,7 +60,8 @@ defmodule EbazeWeb.UserControllerTest do
       assert redirected_to(conn) == Routes.user_path(conn, :show, user)
 
       conn = get(conn, Routes.user_path(conn, :show, user))
-      assert html_response(conn, 200) =~ "some updated password"
+
+      assert html_response(conn, 200) =~ "User updated successfully"
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
@@ -75,6 +76,7 @@ defmodule EbazeWeb.UserControllerTest do
     test "deletes chosen user", %{conn: conn, user: user} do
       conn = delete(conn, Routes.user_path(conn, :delete, user))
       assert redirected_to(conn) == Routes.user_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.user_path(conn, :show, user))
       end

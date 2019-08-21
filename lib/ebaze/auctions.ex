@@ -1,5 +1,4 @@
 defmodule Ebaze.Auctions do
-
   import Ecto.Query, warn: false
   alias Ebaze.Repo
 

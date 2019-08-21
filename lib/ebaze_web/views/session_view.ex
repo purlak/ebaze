@@ -1,3 +1,3 @@
 defmodule EbazeWeb.SessionView do
-    use EbazeWeb, :view
+  use EbazeWeb, :view
 end

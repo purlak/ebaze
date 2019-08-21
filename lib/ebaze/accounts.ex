@@ -1,5 +1,4 @@
 defmodule Ebaze.Accounts do
-
   import Ecto.Query, warn: false
   alias Ebaze.Repo
 
@@ -22,7 +21,6 @@ defmodule Ebaze.Accounts do
     |> User.changeset(attrs)
     |> Repo.update()
   end
-
 
   def delete_user(%User{} = user) do
     Repo.delete(user)

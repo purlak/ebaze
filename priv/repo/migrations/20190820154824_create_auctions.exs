@@ -13,6 +13,5 @@ defmodule Ebaze.Repo.Migrations.CreateAuctions do
 
       timestamps()
     end
-
   end
 end

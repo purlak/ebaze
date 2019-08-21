@@ -3,9 +3,33 @@ defmodule EbazeWeb.AuctionControllerTest do
 
   alias Ebaze.Auctions
 
-  @create_attrs %{description: "some description", end_time: "2010-04-17T14:00:00Z", initial_price: "120.5", name: "some name", photo_url: "some photo_url", sold: true, start_time: "2010-04-17T14:00:00Z"}
-  @update_attrs %{description: "some updated description", end_time: "2011-05-18T15:01:01Z", initial_price: "456.7", name: "some updated name", photo_url: "some updated photo_url", sold: false, start_time: "2011-05-18T15:01:01Z"}
-  @invalid_attrs %{description: nil, end_time: nil, initial_price: nil, name: nil, photo_url: nil, sold: nil, start_time: nil}
+  @create_attrs %{
+    description: "some description",
+    end_time: "2010-04-17T14:00:00Z",
+    initial_price: "120.5",
+    name: "some name",
+    photo_url: "some photo_url",
+    sold: true,
+    start_time: "2010-04-17T14:00:00Z"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    end_time: "2011-05-18T15:01:01Z",
+    initial_price: "456.7",
+    name: "some updated name",
+    photo_url: "some updated photo_url",
+    sold: false,
+    start_time: "2011-05-18T15:01:01Z"
+  }
+  @invalid_attrs %{
+    description: nil,
+    end_time: nil,
+    initial_price: nil,
+    name: nil,
+    photo_url: nil,
+    sold: nil,
+    start_time: nil
+  }
 
   def fixture(:auction) do
     {:ok, auction} = Auctions.create_auction(@create_attrs)
@@ -75,6 +99,7 @@ defmodule EbazeWeb.AuctionControllerTest do
     test "deletes chosen auction", %{conn: conn, auction: auction} do
       conn = delete(conn, Routes.auction_path(conn, :delete, auction))
       assert redirected_to(conn) == Routes.auction_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.auction_path(conn, :show, auction))
       end
