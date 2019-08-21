@@ -8,8 +8,8 @@ Repo.insert!(%User{
 })
 
 Repo.insert!(%User{
-  username: "username",
-  password: "test"
+  username: "user1",
+  password: "t"
 })
 
 Repo.insert!(%Auction{

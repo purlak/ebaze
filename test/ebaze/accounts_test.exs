@@ -62,5 +62,18 @@ defmodule Ebaze.AccountsTest do
       user = user_fixture()
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
+
+    test "creating two users with the same username" do
+      changeset =
+        %User{}
+        |> User.changeset(%{username: "username", password: "password"})
+
+      assert {:ok, _} = Repo.insert(changeset)
+      {:error, new_changeset} = Repo.insert(changeset)
+
+      assert {:username,
+              {"username is not unique. try again",
+               [constraint: :unique, constraint_name: "users_username_index"]}} in new_changeset.errors
+    end
   end
 end
