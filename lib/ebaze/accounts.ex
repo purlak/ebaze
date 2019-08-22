@@ -29,4 +29,17 @@ defmodule Ebaze.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
+
+  def authenticate_user(username, password) do
+    with user = %Ebaze.Accounts.User{} <- get_user(username),
+         true <- Bcrypt.verify_pass(password, user.password) do
+      {:ok, user}
+    else
+      _error -> {:error, "invalid credentials"}
+    end
+  end
+
+  defp get_user(username) do
+    Repo.one(from user in User, where: user.username == ^username)
+  end
 end
