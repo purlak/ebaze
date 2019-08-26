@@ -1,8 +1,8 @@
 <%= form_for @changeset, @action, fn f -> %>
   <label>Username</label>
-  <%= text_input f, :username%>
+  <%= text_input f, :username %>
   <label>Password</label>
-  <%= password_input f, :password%>
+  <%= password_input f, :password %>
   <div>
     <%= submit "Submit" %>
   </div>
