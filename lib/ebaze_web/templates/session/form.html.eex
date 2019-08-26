@@ -1,9 +1,17 @@
 <%= form_for @changeset, @action, fn f -> %>
-  <label>Username</label>
-  <%= text_input f, :username %>
-  <label>Password</label>
-  <%= password_input f, :password %>
-  <div>
+  <div class="form-group">
+    <label>Username</label>
+    <%= text_input f, :username %>
+    <%= error_tag f, :username %>
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <%= password_input f, :password %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit" %>
   </div>
 <% end %>

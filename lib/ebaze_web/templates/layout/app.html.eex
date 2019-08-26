@@ -11,10 +11,16 @@
     <header>
       <section class="container">
         <nav role="navigation">
-          <ul>
-            <li><a href="/signup">Signup</a></li>
-            <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "nav-link" %>
-          </ul>
+          <%= if Ebaze.Accounts.Guardian.Plug.authenticated?(@conn) do %>
+            <ul>
+              <%= link "Signout", to: Routes.session_path(@conn, :signout), class: "nav-link" %>
+            </ul>
+          <% else %>
+            <ul>
+              <li><a href="/signup">Signup</a></li>
+              <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "nav-link" %>    
+            </ul>
+          <% end %>      
         </nav>
         <a href="/" class="phx-logo">
           <img src="<%= Routes.static_path(@conn, "/") %>" alt="Ebaze Logo"/>

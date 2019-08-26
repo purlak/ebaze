@@ -31,11 +31,17 @@ defmodule Ebaze.Accounts do
   end
 
   def authenticate_user(username, password) do
-    with user = %Ebaze.Accounts.User{} <- get_user(username),
-         true <- Bcrypt.verify_pass(password, user.password) do
-      {:ok, user}
-    else
-      _error -> {:error, "invalid credentials"}
+    case get_user(username) do
+      nil ->
+        Bcrypt.no_user_verify()
+        {:error, "User not found."}
+
+      user ->
+        if Bcrypt.verify_pass(password, user.password) do
+          {:ok, user}
+        else
+          {:error, "Invalid Credentials"}
+        end
     end
   end
 
