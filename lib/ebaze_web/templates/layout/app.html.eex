@@ -13,7 +13,7 @@
         <nav role="navigation">
           <%= if Ebaze.Accounts.Guardian.Plug.authenticated?(@conn) do %>
             <ul>
-              <%= link "Signout", to: Routes.session_path(@conn, :signout), class: "nav-link" %>
+              <%= link "Signout", to: Routes.session_path(@conn, :signout), method: :post, class: "nav-link" %>
             </ul>
           <% else %>
             <ul>

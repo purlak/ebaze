@@ -32,11 +32,15 @@ defmodule EbazeWeb.Router do
 
     resources "/sign-in", SessionController, only: [:new, :create]
 
-    get "/signout", SessionController, :signout
+    post "/signout", SessionController, :signout
   end
 
   scope "/", EbazeWeb do
     pipe_through [:browser, :auth, :ensure_auth]
+
+    resources "/users", UserController
+
+    resources "/auctions", AuctionController
 
     get "/protected", PageController, :protected
   end

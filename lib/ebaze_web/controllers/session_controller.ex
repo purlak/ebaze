@@ -38,6 +38,6 @@ defmodule EbazeWeb.SessionController do
     conn
     |> Guardian.Plug.sign_out(_opts = [])
     |> put_flash(:info, "Thanks for visiting! Goodbye!")
-    |> redirect(to: "/sign-in/new")
+    |> redirect(to: "/")
   end
 end
