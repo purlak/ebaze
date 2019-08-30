@@ -1,6 +1,14 @@
 defmodule EbazeWeb.Router do
   use EbazeWeb, :router
 
+  pipeline :auth do
+    plug Ebaze.Accounts.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -14,13 +22,27 @@ defmodule EbazeWeb.Router do
   end
 
   scope "/", EbazeWeb do
-    pipe_through :browser
+    pipe_through [:browser, :auth]
 
     get "/", PageController, :index
+
+    resources "/users", UserController, only: [:new, :create]
+
+    resources "/auctions", AuctionController, only: [:index]
+
+    resources "/sign-in", SessionController, only: [:new, :create]
+
+    post "/signout", SessionController, :signout
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", EbazeWeb do
-  #   pipe_through :api
-  # end
+  scope "/", EbazeWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+
+    resources "/users", UserController, only: [:index, :show, :edit, :update, :delete]
+
+    resources "/auctions", AuctionController,
+      only: [:new, :create, :show, :edit, :update, :delete]
+
+    get "/protected", PageController, :protected
+  end
 end

@@ -1,0 +1,43 @@
+<h1>Show Auction</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @auction.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @auction.description %>
+  </li>
+
+  <li>
+    <strong>Sold:</strong>
+    <%= @auction.sold %>
+  </li>
+
+  <li>
+    <strong>Initial price:</strong>
+    <%= @auction.initial_price %>
+  </li>
+
+  <li>
+    <strong>Start time:</strong>
+    <%= @auction.start_time %>
+  </li>
+
+  <li>
+    <strong>End time:</strong>
+    <%= @auction.end_time %>
+  </li>
+
+  <li>
+    <strong>Photo url:</strong>
+    <img src="<%= @auction.photo_url %>"/>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.auction_path(@conn, :edit, @auction) %></span>
+<span><%= link "Back", to: Routes.auction_path(@conn, :index) %></span>
