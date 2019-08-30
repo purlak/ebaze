@@ -26,9 +26,9 @@ defmodule EbazeWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/users", UserController
+    resources "/users", UserController, only: [:new, :create]
 
-    resources "/auctions", AuctionController
+    resources "/auctions", AuctionController, only: [:index]
 
     resources "/sign-in", SessionController, only: [:new, :create]
 
@@ -38,9 +38,10 @@ defmodule EbazeWeb.Router do
   scope "/", EbazeWeb do
     pipe_through [:browser, :auth, :ensure_auth]
 
-    resources "/users", UserController
+    resources "/users", UserController, only: [:index, :show, :edit, :update, :delete]
 
-    resources "/auctions", AuctionController
+    resources "/auctions", AuctionController,
+      only: [:new, :create, :show, :edit, :update, :delete]
 
     get "/protected", PageController, :protected
   end

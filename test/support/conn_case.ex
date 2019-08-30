@@ -7,6 +7,21 @@ defmodule EbazeWeb.ConnCase do
       alias EbazeWeb.Router.Helpers, as: Routes
 
       @endpoint EbazeWeb.Endpoint
+      def session_conn() do
+        opts =
+          Plug.Session.init(
+            store: :cookie,
+            key: "foobar",
+            encryption_salt: "encrypted cookie salt",
+            signing_salt: "signing salt",
+            log: false,
+            encrypt: false
+          )
+
+        build_conn()
+        |> Plug.Session.call(opts)
+        |> fetch_session()
+      end
     end
   end
 
