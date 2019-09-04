@@ -7,23 +7,12 @@
   <article class="column">
     <h2>Listings</h2>
     <ul>
-      <li>
-      </li>
-      <li>
-      </li>
-      <li>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Listings</h2>
-    <ul>
-      <li>
-      </li>
-      <li>
-      </li>
-      <li>
-      </li>
+      <%= for auction <- @auctions do %>
+        <li>
+          <img src="<%= auction.photo_url %>"/>	
+          <%= link(auction.name, to: Routes.auction_path(@conn, :show, auction), class: "nav-link") %>
+        </li>
+      <% end %>
     </ul>
   </article>
 </section>
