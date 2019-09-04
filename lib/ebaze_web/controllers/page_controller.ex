@@ -1,8 +1,11 @@
 defmodule EbazeWeb.PageController do
   use EbazeWeb, :controller
 
+  alias Ebaze.Auctions
+
   def index(conn, _params) do
-    render(conn, "index.html")
+    auctions = Auctions.list_auctions()
+    render(conn, "index.html", auctions: auctions)
   end
 
   def protected(conn, _) do
