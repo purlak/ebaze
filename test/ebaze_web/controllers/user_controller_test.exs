@@ -13,21 +13,25 @@ defmodule EbazeWeb.UserControllerTest do
   end
 
   describe "new user" do
-    test "renders form", %{conn: conn} do
+    test "GET /signup/new renders form", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :new))
       assert html_response(conn, 200) =~ "New User"
+    end
+
+    test "redirects to index if user is already logged in", %{conn: conn} do
+      Accounts.create_user(@create_attrs)
+      conn = post(conn, Routes.session_path(conn, :create), user: @create_attrs)
+      post_signin_conn = get(conn, Routes.user_path(conn, :new))
+      assert get_flash(post_signin_conn, :info) =~ "already signed in"
+      assert redirected_to(post_signin_conn) == Routes.page_path(post_signin_conn, :index)
     end
   end
 
   describe "create user" do
-    setup [:create_user]
-
-    test "redirects to index when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.session_path(conn, :create), user: @create_attrs)
-
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
-
-      assert html_response(conn, 302)
+    test "POST /signin redirects to sign-in when data is valid", %{conn: conn} do
+      conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
+      assert get_flash(conn, :info) =~ "successful"
+      assert redirected_to(conn) == Routes.session_path(conn, :new)
     end
 
     test "renders errors when data is invalid", %{conn: conn} do

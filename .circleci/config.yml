@@ -52,5 +52,7 @@ jobs:
 
       - run: mix test 
 
+      - run: mix format --check-formatted
+
       - store_test_results:  
           path: _build/test/lib/ebaze 
