@@ -133,7 +133,7 @@ defmodule EbazeWeb.AuctionControllerTest do
   defp create_and_sign_in_user(_) do
     {:ok, _user} = Accounts.create_user(%{password: "some password", username: "some username"})
 
-    post(conn, Routes.session_path(conn, :create),
+    post(build_conn(), Routes.session_path(build_conn(), :create),
       user: %{password: "some password", username: "some username"}
     )
   end
