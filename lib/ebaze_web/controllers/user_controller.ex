@@ -1,8 +1,7 @@
 defmodule EbazeWeb.UserController do
   use EbazeWeb, :controller
 
-  alias Ebaze.Accounts
-  alias Ebaze.Accounts.User
+  alias Ebaze.{Accounts, Accounts.User, Accounts.Guardian}
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -10,16 +9,24 @@ defmodule EbazeWeb.UserController do
   end
 
   def new(conn, _params) do
-    changeset = Accounts.change_user(%User{})
-    render(conn, "new.html", changeset: changeset)
+    if Guardian.Plug.current_resource(conn) do
+      conn
+      |> put_flash(:info, "You are already signed in!")
+      |> redirect(to: Routes.page_path(conn, :index))
+    else
+      render(conn, "new.html",
+        changeset: Accounts.change_user(%User{}),
+        action: Routes.user_path(conn, :create)
+      )
+    end
   end
 
   def create(conn, %{"user" => user_params}) do
     case Accounts.create_user(user_params) do
-      {:ok, user} ->
+      {:ok, _user} ->
         conn
-        |> put_flash(:info, "User created successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> put_flash(:info, "User created successfully. ")
+        |> redirect(to: Routes.session_path(conn, :new))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

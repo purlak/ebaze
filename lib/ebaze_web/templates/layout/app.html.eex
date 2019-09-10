@@ -18,7 +18,7 @@
             </ul>
           <% else %>
             <ul>
-              <li><a href="/signup">Signup</a></li>
+              <%= link "Signup", to: Routes.user_path(@conn, :new), class: "nav-link" %>    
               <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "nav-link" %>    
             </ul>
           <% end %>      

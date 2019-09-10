@@ -26,7 +26,7 @@ defmodule EbazeWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/users", UserController, only: [:new, :create]
+    resources "/signup", UserController, only: [:new, :create]
 
     resources "/auctions", AuctionController, only: [:index]
 
