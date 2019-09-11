@@ -12,10 +12,6 @@ defmodule Ebaze.Accounts.ErrorHandler do
       conn
       |> put_flash(:error, "Sign-in to continue")
       |> redirect(to: Routes.session_path(conn, :new))
-    else
-      conn
-      |> put_resp_content_type("text/plain")
-      |> send_resp(401, body)
     end
   end
 end
