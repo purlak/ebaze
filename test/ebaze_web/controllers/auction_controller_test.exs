@@ -51,9 +51,9 @@ defmodule EbazeWeb.AuctionControllerTest do
       assert html_response(post_signin_conn, 200) =~ "New Auction"
     end
 
-    test "returns 401 status code when user is not signed in", %{conn: conn} do
+    test "redirects to GET /sign-in/new when user is not signed in", %{conn: conn} do
       conn = get(conn, Routes.auction_path(conn, :new))
-      assert conn |> response(401) == "unauthenticated"
+      assert redirected_to(conn) == Routes.session_path(conn, :new)
     end
   end
 
