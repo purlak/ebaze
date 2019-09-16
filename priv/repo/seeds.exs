@@ -2,7 +2,10 @@ alias Ebaze.Accounts.User
 alias Ebaze.Auctions.Auction
 alias Ebaze.Repo
 
-User.changeset(%User{}, %{username: "username", password: "password"})
+User.changeset(%User{}, %{
+  username: "username",
+  password: "password"
+})
 |> Repo.insert!()
 
 Auction.changeset(
