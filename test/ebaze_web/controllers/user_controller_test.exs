@@ -1,16 +1,7 @@
 defmodule EbazeWeb.UserControllerTest do
   use EbazeWeb.ConnCase
 
-  alias Ebaze.Accounts
-
-  @create_attrs %{password: "some password", username: "some username"}
-  @update_attrs %{password: "some updated password", username: "some updated username"}
-  @invalid_attrs %{password: nil, username: nil}
-
-  def fixture(:user) do
-    {:ok, user} = Accounts.create_user(@create_attrs)
-    user
-  end
+  import Ebaze.UserFixtures
 
   describe "new user" do
     test "GET /signup/new renders form", %{conn: conn} do
@@ -19,8 +10,8 @@ defmodule EbazeWeb.UserControllerTest do
     end
 
     test "redirects to index if user is already logged in", %{conn: conn} do
-      Accounts.create_user(@create_attrs)
-      conn = post(conn, Routes.session_path(conn, :create), user: @create_attrs)
+      create_user()
+      conn = post(conn, Routes.session_path(conn, :create), user: user_fixture(:user_attrs))
       post_signin_conn = get(conn, Routes.user_path(conn, :new))
       assert get_flash(post_signin_conn, :info) =~ "already signed in"
       assert redirected_to(post_signin_conn) == Routes.page_path(post_signin_conn, :index)
@@ -29,34 +20,43 @@ defmodule EbazeWeb.UserControllerTest do
 
   describe "create user" do
     test "POST /signin redirects to sign-in when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
+      conn = post(conn, Routes.user_path(conn, :create), user: user_fixture(:user_attrs))
       assert get_flash(conn, :info) =~ "successful"
       assert redirected_to(conn) == Routes.session_path(conn, :new)
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.user_path(conn, :create), user: @invalid_attrs)
+      conn = post(conn, Routes.user_path(conn, :create), user: user_fixture(:user_invalid_attrs))
 
       assert html_response(conn, 200) =~ "New User"
     end
   end
 
   describe "edit user" do
-    setup [:create_user]
+    setup do
+      user = create_user()
+      {:ok, user: user}
+    end
 
     test "renders form for editing chosen user", %{conn: conn, user: user} do
-      conn = post(conn, Routes.session_path(conn, :create), user: @create_attrs)
+      conn = post(conn, Routes.session_path(conn, :create), user: user_fixture(:user_attrs))
       conn = get(conn, Routes.user_path(conn, :edit, user))
       assert html_response(conn, 200) =~ "Edit User"
     end
   end
 
   describe "update user" do
-    setup [:create_user]
+    setup do
+      user = create_user()
+      {:ok, user: user}
+    end
 
     test "redirects when data is valid", %{conn: conn, user: user} do
-      conn = post(conn, Routes.session_path(conn, :create), user: @create_attrs)
-      conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
+      conn = post(conn, Routes.session_path(conn, :create), user: user_fixture(:user_attrs))
+
+      conn =
+        put(conn, Routes.user_path(conn, :update, user), user: user_fixture(:user_update_attrs))
+
       assert redirected_to(conn) == Routes.user_path(conn, :show, user)
 
       conn = get(conn, Routes.user_path(conn, :show, user))
@@ -65,17 +65,23 @@ defmodule EbazeWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
-      conn = post(conn, Routes.session_path(conn, :create), user: @create_attrs)
-      conn = put(conn, Routes.user_path(conn, :update, user), user: @invalid_attrs)
+      conn = post(conn, Routes.session_path(conn, :create), user: user_fixture(:user_attrs))
+
+      conn =
+        put(conn, Routes.user_path(conn, :update, user), user: user_fixture(:user_invalid_attrs))
+
       assert html_response(conn, 200) =~ "Edit User"
     end
   end
 
   describe "delete user" do
-    setup [:create_user]
+    setup do
+      user = create_user()
+      {:ok, user: user}
+    end
 
     test "deletes chosen user", %{conn: conn, user: user} do
-      conn = post(conn, Routes.session_path(conn, :create), user: @create_attrs)
+      conn = post(conn, Routes.session_path(conn, :create), user: user_fixture(:user_attrs))
       conn = delete(conn, Routes.user_path(conn, :delete, user))
       assert redirected_to(conn) == Routes.user_path(conn, :index)
 
@@ -83,10 +89,5 @@ defmodule EbazeWeb.UserControllerTest do
         get(conn, Routes.user_path(conn, :show, user))
       end
     end
-  end
-
-  defp create_user(_) do
-    user = fixture(:user)
-    {:ok, user: user}
   end
 end
