@@ -29,7 +29,7 @@ defmodule EbazeWeb.AuctionControllerTest do
 
   describe "create auction" do
     test "redirects to show when data is valid", %{conn: conn} do
-      _user = create_user()
+      user = create_user()
       user_conn = sign_in_user(conn)
 
       post_signin_conn =
@@ -42,6 +42,7 @@ defmodule EbazeWeb.AuctionControllerTest do
 
       conn = get(post_signin_conn, Routes.auction_path(post_signin_conn, :show, id))
       assert html_response(conn, 200) =~ "Show Auction"
+      assert html_response(conn, 200) =~ "#{user.username}"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -53,7 +54,8 @@ defmodule EbazeWeb.AuctionControllerTest do
           auction: auction_fixture(:auction_invalid_attrs)
         )
 
-      assert html_response(post_signin_conn, 200)
+      assert html_response(post_signin_conn, 200) =~
+               "Oops, something went wrong! Please check the errors below."
     end
   end
 
