@@ -29,11 +29,13 @@ defmodule EbazeWeb.AuctionControllerTest do
 
   describe "create auction" do
     test "redirects to show when data is valid", %{conn: conn} do
-      user = create_user()
+      _user = create_user()
       user_conn = sign_in_user(conn)
 
       post_signin_conn =
-        post(user_conn, Routes.auction_path(user_conn, :create), auction: auction_attrs(user))
+        post(user_conn, Routes.auction_path(user_conn, :create),
+          auction: auction_fixture(:auction_create_attrs)
+        )
 
       assert %{id: id} = redirected_params(post_signin_conn)
       assert redirected_to(post_signin_conn) == Routes.auction_path(post_signin_conn, :show, id)
@@ -59,7 +61,7 @@ defmodule EbazeWeb.AuctionControllerTest do
     test "renders form for editing chosen auction", %{conn: conn} do
       user = create_user()
       user_conn = sign_in_user(conn)
-      {:ok, auction} = Auctions.create_auction(auction_attrs(user))
+      {:ok, auction} = Auctions.create_auction(auction_fixture(:auction_create_attrs, user))
       post_signin_conn = get(user_conn, Routes.auction_path(user_conn, :edit, auction))
       assert html_response(post_signin_conn, 200) =~ "Edit Auction"
     end
@@ -70,7 +72,7 @@ defmodule EbazeWeb.AuctionControllerTest do
       user = create_user()
       user_conn = sign_in_user(conn)
 
-      {:ok, auction} = Auctions.create_auction(auction_attrs(user))
+      {:ok, auction} = Auctions.create_auction(auction_fixture(:auction_create_attrs, user))
 
       post_signin_conn =
         put(user_conn, Routes.auction_path(user_conn, :update, auction),
@@ -88,7 +90,7 @@ defmodule EbazeWeb.AuctionControllerTest do
       user = create_user()
       user_conn = sign_in_user(conn)
 
-      {:ok, auction} = Auctions.create_auction(auction_attrs(user))
+      {:ok, auction} = Auctions.create_auction(auction_fixture(:auction_create_attrs, user))
 
       post_signin_conn =
         put(user_conn, Routes.auction_path(user_conn, :update, auction),
@@ -104,7 +106,7 @@ defmodule EbazeWeb.AuctionControllerTest do
       user = create_user()
       user_conn = sign_in_user(conn)
 
-      {:ok, auction} = Auctions.create_auction(auction_attrs(user))
+      {:ok, auction} = Auctions.create_auction(auction_fixture(:auction_create_attrs, user))
 
       post_signin_conn = delete(user_conn, Routes.auction_path(user_conn, :delete, auction))
       assert redirected_to(post_signin_conn) == Routes.auction_path(post_signin_conn, :index)

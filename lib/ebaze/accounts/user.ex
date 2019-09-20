@@ -7,7 +7,7 @@ defmodule Ebaze.Accounts.User do
   schema "users" do
     field :password, :string
     field :username, :string
-    has_many :auctions, Auction
+    has_many :auctions, Auction, foreign_key: :created_by_id
     timestamps()
   end
 

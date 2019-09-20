@@ -22,11 +22,6 @@ defmodule Ebaze.UserFixtures do
     user
   end
 
-  def get_user() do
-    user = create_user()
-    {:ok, user}
-  end
-
   def sign_in_user(_) do
     post(build_conn(), EbazeWeb.Router.Helpers.session_path(build_conn(), :create),
       user: %{password: "some password", username: "some username"}
