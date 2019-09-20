@@ -2,10 +2,12 @@ defmodule Ebaze.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Ebaze.{Auctions.Auction}
+
   schema "users" do
     field :password, :string
     field :username, :string
-
+    has_many :auctions, Auction
     timestamps()
   end
 
