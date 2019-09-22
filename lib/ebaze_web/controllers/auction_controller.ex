@@ -1,7 +1,10 @@
 defmodule EbazeWeb.AuctionController do
   use EbazeWeb, :controller
 
+  alias Ebaze.Accounts
+
   alias Ebaze.Auctions
+
   alias Ebaze.Auctions.Auction
 
   def index(conn, _params) do
@@ -14,7 +17,11 @@ defmodule EbazeWeb.AuctionController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"auction" => auction_params}) do
+  def create(conn, %{"auction" => params}) do
+    auction_params =
+      params
+      |> Map.put("created_by_id", Guardian.Plug.current_resource(conn).id)
+
     case Auctions.create_auction(auction_params) do
       {:ok, auction} ->
         conn
@@ -28,7 +35,8 @@ defmodule EbazeWeb.AuctionController do
 
   def show(conn, %{"id" => id}) do
     auction = Auctions.get_auction!(id)
-    render(conn, "show.html", auction: auction)
+    user = Accounts.get_user!(auction.created_by_id)
+    render(conn, "show.html", auction: auction, user: user)
   end
 
   def edit(conn, %{"id" => id}) do

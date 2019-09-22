@@ -33,6 +33,11 @@
   </li>
 
   <li>
+    <strong>Listing created by:</strong>
+    <%= @user.username %>
+  </li>
+
+  <li>
     <strong>Photo url:</strong>
     <img src="<%= @auction.photo_url %>"/>
   </li>

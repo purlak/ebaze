@@ -25,7 +25,7 @@ defmodule Ebaze.AuctionFixtures do
     }
   end
 
-  def auction_attrs(user) do
+  def auction_fixture(:auction_create_attrs) do
     %{
       description: "some description",
       end_time: "2010-04-17T14:00:00Z",
@@ -33,8 +33,12 @@ defmodule Ebaze.AuctionFixtures do
       name: "some name",
       photo_url: "some photo_url",
       sold: true,
-      start_time: "2010-04-17T14:00:00Z",
-      created_by_id: user.id
+      start_time: "2010-04-17T14:00:00Z"
     }
+  end
+
+  def auction_fixture(:auction_create_attrs, user) do
+    auction_fixture(:auction_create_attrs)
+    |> Map.put(:created_by_id, user.id)
   end
 end
