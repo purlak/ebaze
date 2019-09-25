@@ -66,9 +66,9 @@ defmodule EbazeWeb.AuctionController do
     |> redirect(to: Routes.auction_path(conn, :index))
   end
 
-  def sell(conn, _params) do
+  def my_auctions(conn, _params) do
     user = Accounts.get_user!(Guardian.Plug.current_resource(conn).id)
     auctions = Auctions.list_my_auctions(user)
-    render(conn, "sell.html", auctions: auctions)
+    render(conn, "my_auctions.html", auctions: auctions)
   end
 end

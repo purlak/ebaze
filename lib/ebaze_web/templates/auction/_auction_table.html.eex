@@ -1,18 +1,15 @@
-<h1>My Auctions</h1>
-
-<%= if length(@auctions) != 0 do %> 
 <table>
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Sold status</th>
-      <th>Initial price</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Photo url</th>
-      <th></th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Sold status</th>
+        <th>Initial price</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Photo url</th>
+        <th></th>
+      </tr>
   </thead>
   <tbody>
     <%= for auction <- @auctions do %>
@@ -33,8 +30,3 @@
     <% end %>   
   </tbody>
 </table>
-<% else %>
-  <h4>You have no current listings.</h4>
-<% end %>
-
-<span><%= link "New Auction", to: Routes.auction_path(@conn, :new) %></span>

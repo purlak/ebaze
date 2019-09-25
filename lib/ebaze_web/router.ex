@@ -42,7 +42,7 @@ defmodule EbazeWeb.Router do
 
     resources "/auctions", AuctionController, except: [:index]
 
-    get "/sell", AuctionController, :sell
+    get "/my-auctions", AuctionController, :my_auctions
 
     get "/protected", PageController, :protected
   end
