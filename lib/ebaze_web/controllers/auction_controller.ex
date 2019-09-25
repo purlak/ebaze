@@ -1,11 +1,9 @@
 defmodule EbazeWeb.AuctionController do
   use EbazeWeb, :controller
 
-  alias Ebaze.Accounts
+  alias Ebaze.{Accounts, Accounts.Guardian}
 
-  alias Ebaze.Auctions
-
-  alias Ebaze.Auctions.Auction
+  alias Ebaze.{Auctions, Auctions.Auction}
 
   def index(conn, _params) do
     auctions = Auctions.list_auctions()
@@ -66,5 +64,11 @@ defmodule EbazeWeb.AuctionController do
     conn
     |> put_flash(:info, "Auction deleted successfully.")
     |> redirect(to: Routes.auction_path(conn, :index))
+  end
+
+  def sell(conn, _params) do
+    user = Accounts.get_user!(Guardian.Plug.current_resource(conn).id)
+    auctions = Auctions.list_my_auctions(user)
+    render(conn, "sell.html", auctions: auctions)
   end
 end

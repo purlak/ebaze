@@ -1,5 +1,6 @@
-<h1>Listing Auctions</h1>
+<h1>My Auctions</h1>
 
+<%= if length(@auctions) != 0 do %> 
 <table>
   <thead>
     <tr>
@@ -10,7 +11,6 @@
       <th>Start time</th>
       <th>End time</th>
       <th>Photo url</th>
-
       <th></th>
     </tr>
   </thead>
@@ -30,8 +30,11 @@
           <%= link "Delete", to: Routes.auction_path(@conn, :delete, auction), method: :delete, data: [confirm: "Are you sure?"] %>
         </td>
       </tr>
-    <% end %>
+    <% end %>   
   </tbody>
 </table>
+<% else %>
+  <h4>You have no current listings.</h4>
+<% end %>
 
 <span><%= link "New Auction", to: Routes.auction_path(@conn, :new) %></span>
