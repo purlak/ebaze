@@ -41,4 +41,16 @@ defmodule Ebaze.AuctionFixtures do
     auction_fixture(:auction_create_attrs)
     |> Map.put(:created_by_id, user.id)
   end
+
+  def auction_fixture(:auction_open_attrs, user) do
+    auction_fixture(:auction_create_attrs)
+    |> Map.put(:end_time, "2019-10-18T15:01:01Z")
+    |> Map.put(:created_by_id, user.id)
+  end
+
+  def auction_fixture(:auction_closed_attrs, user) do
+    auction_fixture(:auction_create_attrs)
+    |> Map.put(:name, "closed auction")
+    |> Map.put(:created_by_id, user.id)
+  end
 end

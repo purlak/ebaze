@@ -19,7 +19,7 @@ defmodule Ebaze.Auctions do
     not_specified = nil
 
     query()
-    |> where([auction], auction.end_time < ^now or auction.end_time == ^not_specified)
+    |> where([auction], auction.end_time > ^now or auction.end_time == ^not_specified)
     |> Repo.all()
   end
 

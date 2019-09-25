@@ -18,8 +18,14 @@ defmodule Ebaze.UserFixtures do
   end
 
   def create_user() do
-    {:ok, user} = Accounts.create_user(%{password: "some password", username: "some username"})
+    {:ok, user} = Accounts.create_user(user_fixture(:user_attrs))
     user
+  end
+
+  def create_another_user() do
+    {:ok, another_user} = Accounts.create_user(user_fixture(:user_update_attrs))
+
+    another_user
   end
 
   def sign_in_user(_) do
