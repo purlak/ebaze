@@ -8,6 +8,21 @@ defmodule Ebaze.Auctions do
     Repo.all(Auction)
   end
 
+  def list_my_auctions(user) do
+    query()
+    |> where(created_by_id: ^user.id)
+    |> Repo.all()
+  end
+
+  def list_open_auctions() do
+    now = DateTime.utc_now()
+    not_specified = nil
+
+    query()
+    |> where([auction], auction.end_time > ^now or auction.end_time == ^not_specified)
+    |> Repo.all()
+  end
+
   def get_auction!(id), do: Repo.get!(Auction, id)
 
   def create_auction(attrs \\ %{}) do
@@ -28,5 +43,9 @@ defmodule Ebaze.Auctions do
 
   def change_auction(%Auction{} = auction) do
     Auction.changeset(auction, %{})
+  end
+
+  defp query do
+    from(auction in Auction)
   end
 end

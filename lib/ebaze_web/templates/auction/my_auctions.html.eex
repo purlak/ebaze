@@ -1,0 +1,9 @@
+<h1>My Auctions</h1>
+
+<%= if length(@auctions) != 0 do %> 
+  <%= render "_auction_table.html", auctions: @auctions, conn: @conn %>
+<% else %>
+  <h4>You have no current listings.</h4>
+<% end %>
+
+<span><%= link "New Auction", to: Routes.auction_path(@conn, :new) %></span>

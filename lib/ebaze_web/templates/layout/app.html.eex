@@ -14,6 +14,7 @@
           <%= if Ebaze.Accounts.Guardian.Plug.authenticated?(@conn) do %>
             <ul>
               <%= link "New Listing", to: Routes.auction_path(@conn, :new), class: "nav-link" %>
+              <%= link "My Listings", to: Routes.auction_path(@conn, :my_auctions), class: "nav-link" %>
               <%= link "Signout", to: Routes.session_path(@conn, :signout), method: :post, class: "nav-link" %>
             </ul>
           <% else %>

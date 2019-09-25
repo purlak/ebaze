@@ -4,7 +4,7 @@ defmodule EbazeWeb.PageController do
   alias Ebaze.Auctions
 
   def index(conn, _params) do
-    auctions = Auctions.list_auctions()
+    auctions = Auctions.list_open_auctions()
     render(conn, "index.html", auctions: auctions)
   end
 

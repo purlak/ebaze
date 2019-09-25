@@ -118,4 +118,22 @@ defmodule EbazeWeb.AuctionControllerTest do
       end
     end
   end
+
+  describe "GET /my-auctions" do
+    test "my-auctions displays user's own auctions", %{conn: conn} do
+      user = create_user()
+      another_user = create_another_user()
+
+      {:ok, user_auction} = Auctions.create_auction(auction_fixture(:auction_open_attrs, user))
+
+      {:ok, another_user_auction} =
+        Auctions.create_auction(auction_fixture(:auction_closed_attrs, another_user))
+
+      user_conn = sign_in_user(conn)
+
+      post_signin_conn = get(user_conn, Routes.auction_path(conn, :my_auctions))
+      assert html_response(post_signin_conn, 200) =~ "#{user_auction.name}"
+      assert html_response(post_signin_conn, 200) != ~s"#{another_user_auction.name}"
+    end
+  end
 end
