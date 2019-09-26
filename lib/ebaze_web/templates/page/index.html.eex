@@ -1,18 +1,18 @@
-<section class="phx-hero">
+<section class="welcome">
   <h1><%= gettext "Welcome to %{name}!", name: "Ebaze" %></h1>
-  <p>New auction items listed everyday. Sell or Bid now!<br/></p>
+  <p>New auction items listed everyday. Sell or Bid now!</p>
 </section>
 
-<section class="row">
-  <article class="column">
+<div class="row">
+  <article class="listings-body">
     <h2>Listings</h2>
     <ul>
       <%= for auction <- @auctions do %>
-        <li>
-          <img src="<%= auction.photo_url %>"/>	
+        <img src="<%= auction.photo_url %>"/>	
+        <div>
           <%= link(auction.name, to: Routes.auction_path(@conn, :show, auction), class: "nav-link") %>
-        </li>
+        </div>
       <% end %>
     </ul>
   </article>
-</section>
+</div>

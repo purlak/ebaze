@@ -19,13 +19,17 @@
             </ul>
           <% else %>
             <ul>
-              <%= link "Signup", to: Routes.user_path(@conn, :new), class: "nav-link" %>    
-              <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "nav-link" %>    
+              <div>
+                <%= link "Signup", to: Routes.user_path(@conn, :new), class: "nav-link", class: "button" %>    
+              </div>
+              <div>
+                <%= link "Sign in", to: Routes.session_path(@conn, :new), class: "nav-link", class: "button" %>    
+              </div>
             </ul>
           <% end %>      
         </nav>
-        <a href="/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/") %>" alt="Ebaze Logo"/>
+        <a href="/" class="ebaze-logo">
+          <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" alt="Ebaze Logo"/>
         </a>
       </section>
     </header>
