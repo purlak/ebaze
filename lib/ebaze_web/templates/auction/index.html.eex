@@ -2,4 +2,4 @@
 
 <%= render "_auction_table.html", auctions: @auctions, conn: @conn %>
 
-<span><%= link "New Auction", to: Routes.auction_path(@conn, :new) %></span>
+<span><%= link "New Auction", to: Routes.auction_path(@conn, :new), class: "button" %></span>

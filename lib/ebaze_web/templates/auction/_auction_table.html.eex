@@ -7,7 +7,6 @@
         <th>Initial price</th>
         <th>Start time</th>
         <th>End time</th>
-        <th>Photo url</th>
         <th></th>
       </tr>
   </thead>
@@ -20,10 +19,13 @@
         <td><%= auction.initial_price %></td>
         <td><%= auction.start_time %></td>
         <td><%= auction.end_time %></td>
-        <td><%= auction.photo_url %></td>
         <td>
+          <div>
           <%= link "Show", to: Routes.auction_path(@conn, :show, auction) %>
+          </div>
+          <div>
           <%= link "Edit", to: Routes.auction_path(@conn, :edit, auction) %>
+          </div>
           <%= link "Delete", to: Routes.auction_path(@conn, :delete, auction), method: :delete, data: [confirm: "Are you sure?"] %>
         </td>
       </tr>

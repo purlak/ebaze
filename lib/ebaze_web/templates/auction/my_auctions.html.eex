@@ -6,4 +6,4 @@
   <h4>You have no current listings.</h4>
 <% end %>
 
-<span><%= link "New Auction", to: Routes.auction_path(@conn, :new) %></span>
+<span><%= link "New Auction", to: Routes.auction_path(@conn, :new), class: "button" %></span>

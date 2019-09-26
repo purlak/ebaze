@@ -1,48 +1,41 @@
 <h1>Show Auction</h1>
-
+<img src="<%= @auction.photo_url %>"/>
 <ul>
+    <div>
+      <strong>Name:</strong>
+      <%= @auction.name %>
+    </div>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @auction.name %>
-  </li>
+    <div>
+      <strong>Description:</strong>
+      <%= @auction.description %>
+     </div>
 
-  <li>
-    <strong>Description:</strong>
-    <%= @auction.description %>
-  </li>
+    <div>
+      <strong>Sold:</strong>
+      <%= @auction.sold %>
+     </div>
 
-  <li>
-    <strong>Sold:</strong>
-    <%= @auction.sold %>
-  </li>
+    <div>
+      <strong>Initial price:</strong>
+      <%= @auction.initial_price %>
+     </div>
 
-  <li>
-    <strong>Initial price:</strong>
-    <%= @auction.initial_price %>
-  </li>
+    <div>
+      <strong>Start time:</strong>
+      <%= @auction.start_time %>
+     </div>
 
-  <li>
-    <strong>Start time:</strong>
-    <%= @auction.start_time %>
-  </li>
+    <div>
+      <strong>End time:</strong>
+      <%= @auction.end_time %>
+     </div>
 
-  <li>
-    <strong>End time:</strong>
-    <%= @auction.end_time %>
-  </li>
-
-  <li>
-    <strong>Listing created by:</strong>
-    <%= @user.username %>
-  </li>
-
-  <li>
-    <strong>Photo url:</strong>
-    <img src="<%= @auction.photo_url %>"/>
-  </li>
-
+    <div>
+      <strong>Listing created by:</strong>
+      <%= @user.username %>  
+     </div>  
 </ul>
 
-<span><%= link "Edit", to: Routes.auction_path(@conn, :edit, @auction) %></span>
-<span><%= link "Back", to: Routes.auction_path(@conn, :index) %></span>
+<span><%= link "Edit", to: Routes.auction_path(@conn, :edit, @auction), class: "button" %></span>
+<span><%= link "Back", to: Routes.auction_path(@conn, :index), class: "button" %></span>

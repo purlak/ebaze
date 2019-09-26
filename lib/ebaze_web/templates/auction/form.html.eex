@@ -13,25 +13,28 @@
   <%= text_input f, :description %>
   <%= error_tag f, :description %>
 
-  <%= label f, :sold %>
-  <%= checkbox f, :sold %>
-  <%= error_tag f, :sold %>
-
   <%= label f, :initial_price %>
   <%= number_input f, :initial_price, step: "any" %>
   <%= error_tag f, :initial_price %>
 
   <%= label f, :start_time %>
+  <div>
   <%= datetime_select f, :start_time %>
   <%= error_tag f, :start_time %>
-
+  </div>
+  
   <%= label f, :end_time %>
+  
+  <div>
   <%= datetime_select f, :end_time %>
   <%= error_tag f, :end_time %>
-
+  </div>
+  
+  <div>
   <%= label f, :photo_url %>
   <%= text_input f, :photo_url %>
   <%= error_tag f, :photo_url %>
+  </div>
 
   <div>
     <%= submit "Save" %>
