@@ -1,6 +1,12 @@
-# Ebaze
-
-To start your Phoenix server:
+# eBaze
+Requirements-
+  * elixir 1.5
+  * phoenix 1.4.9
+  * postgreSQL 11
+  * node 12.8.0
+  * package manager such as npm or yarn
+ 
+To start your Phoenix server-
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
@@ -9,12 +15,8 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Login username and password-
+Username: username
+Password: password
 
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+Link to production: https://ebaze.herokuapp.com/
