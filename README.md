@@ -1,4 +1,4 @@
-# eBaze
+# Ebay Clone
 Requirements-
   * elixir 1.5
   * phoenix 1.4.9
